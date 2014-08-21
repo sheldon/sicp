@@ -1,0 +1,26 @@
+(define (p) (p))
+
+(define (test x y)
+  (if (= x 0)
+      0
+      y))
+
+(test 0 (p))
+
+
+applicative order:
+
+(test 0 (p))
+
+(test 0 (p))
+
+(test 0 (p))
+
+neverending expansion of (p)
+
+
+normal order:
+
+0
+
+the 2 orders of evaluation don't effect the outcome, only the process

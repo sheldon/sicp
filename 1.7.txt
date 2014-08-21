@@ -1,0 +1,35 @@
+(define (good-enough? guess x)
+  (< (abs (- (square guess) x)) 0.001))
+
+
+The good-enough? test used in computing square roots will not be very effective for finding the square roots of very small numbers.
+
+The test will pass on the first iteration.
+
+(< (abs (- (square 0.01) 0.01)) 0.001)
+
+
+Also, in real computers, arithmetic operations are almost always performed with limited precision. This makes our test inadequate for very large numbers.
+
+The square of a large enough number would wrap around the max size of an int.
+
+(define half-max (sqrt max-int))
+
+(< (abs (- (square (+ half-max (sqrt x))) x)) 0.001)
+
+
+An alternative strategy for implementing good-enough? is to watch how guess changes from one iteration to the next and to stop when the change is a very small fraction of the guess. Design a square-root procedure that uses this kind of end test.
+
+(define (sqrt-iter guess last-guess x)
+  (if (good-enough? guess last-guess x)
+          guess
+          (sqrt-iter (improve guess x)
+          			 guess
+                     x)))
+
+(define (good-enough? guess last-guess x)
+		(< (abs (- last-guess guess)) 0.0000001))
+
+Does this work better for small and large numbers?
+
+no
